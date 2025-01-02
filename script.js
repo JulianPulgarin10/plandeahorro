@@ -151,7 +151,7 @@ function loadSavings() {
         const savingItem = document.createElement("div");
         savingItem.classList.add("saving-item");
         savingItem.innerHTML = `
-            <span style="color: white;">Depósito ${index + 1}: $${amount.toLocaleString()}</span>
+            <span style="color: white;">Depósito${index + 1}: $${amount.toLocaleString()}</span>
             <div>
                 <i class="fas fa-dollar-sign icon-btn deposit" data-step="${index}"></i>
                 <i class="fas fa-trash icon-btn delete" data-step="${index}"></i>
@@ -318,6 +318,13 @@ setIconColor();
 
 // Detectar cuando el tamaño de la ventana cambie
 window.addEventListener('resize', setIconColor);
+
+
+
+
+
+
+
 
 
 
