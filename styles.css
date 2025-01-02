@@ -1,4 +1,5 @@
 
+
 #particles-js {
     position: absolute;
     top: 0;
@@ -175,6 +176,41 @@ h3:hover {
     text-decoration: line-through;
     background: #dcedc8;
 }
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 600px) {
+    /* Hacer que los íconos y el texto estén en una sola fila, ajustados */
+    .saving-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; /* Asegurar que el elemento ocupe todo el ancho */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* Ajustar el tamaño de texto */
+    .saving-item span {
+        font-size: 12px;
+        flex-grow: 1;
+        word-wrap: break-word;
+        white-space: normal; /* Asegurar que el texto se ajuste al contenedor */
+    }
+
+    /* Reducir el tamaño de los íconos */
+    .icon-btn {
+        font-size: 16px;
+        margin: 0 5px;
+    }
+
+    /* Botón "Ver más" ajustado */
+    #showMoreBtn {
+        font-size: 14px;
+        padding: 8px 16px;
+        width: 100%; /* Hacer que el botón ocupe todo el ancho */
+    }
+}
+
 
 /* Estilos de botones */
 button {
@@ -538,6 +574,15 @@ button {
 .btn-confirm:hover, .btn-cancel:hover {
     opacity: 0.8;
 }
+
+
+
+
+
+
+
+
+
 
 
 
