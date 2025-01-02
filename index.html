@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Ahorro</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Incluyendo Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+    <div id="particles-js"></div>
+
+   
+    
+      
+    
+   
+    
+      
+
+
+
+    <div class="container">
+        <h1>Plan de Ahorro</h1>
+        <div id="goal">
+            <h3>Meta: $3,000,000</h3>
+        </div>
+        <div id="progress-bar">
+            <div id="progress-bar-inner"></div>
+        </div>
+        <br>
+        <div id="savings-list"></div>
+        <button id="show-more-btn"> <i class="fas fa-arrow-down"></i> <!-- Ícono para "Ver Más" --> </button>
+            <button id="reset-btn"> <i class="fas fa-sync-alt"></i> <!-- Ícono de "Reiniciar" --> </button>
+        </div>
+
+    <!-- Modal para editar depósito -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <h2>Editar Depósito</h2>
+        <input type="number" id="editAmount" placeholder="Nuevo monto" />
+        <div class="modal-actions">
+            <button id="saveBtn">Guardar</button>
+            <button id="cancelBtn">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div id="delete-confirmation-modal" class="modal">
+    <div class="modal-content">
+        <h3>¿Estás seguro de que deseas eliminar este ítem?</h3>
+        <button id="confirm-delete" class="btn-confirm">Sí, eliminar</button>
+        <button id="cancel-delete" class="btn-cancel">Cancelar</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="encouragement-message" class="encouragement-message"></div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

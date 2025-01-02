@@ -1,0 +1,549 @@
+
+#particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Asegura que las partículas estén por detrás del contenido */
+  }
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0f0f0f;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgb(248, 247, 247), 0 12px 24px rgb(247, 245, 245);
+}
+
+
+
+/* Fuente para el título */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+/* Estilos del título h1 */
+h1 {
+    font-family: 'Playfair Display', serif; /* Fuente elegante */
+    font-size: 3rem; /* Tamaño destacado */
+    font-weight: 700; /* Negrita */
+    text-align: center; /* Centrado */
+    background: linear-gradient(45deg, #6a11cb, #2575fc); /* Degradado diagonal */
+    -webkit-background-clip: text; /* Aplicar el degradado al texto */
+    -webkit-text-fill-color: transparent; /* Texto transparente para mostrar el degradado */
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-transform: uppercase; /* Letras mayúsculas */
+    text-shadow: 2px 2px 7px rgba(0, 0, 0, 0.25); /* Sombra suave */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out; /* Transición suave */
+    
+    /* Efecto de entrada */
+    opacity: 0; /* Comienza invisible */
+    transform: translateY(100%); /* Comienza desde abajo */
+    animation: slideIn 1s forwards; /* Animación */
+}
+
+/* Animación para el efecto de entrada (de abajo hacia arriba) */
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(100%); /* Empieza fuera de la pantalla, abajo */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Se mueve a su posición original */
+    }
+}
+
+
+h1:hover {
+    color: #fff; /* Color blanco al pasar el ratón */
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada al pasar el ratón */
+}
+
+
+/* Estilo para el progreso */
+#goal {
+    margin-bottom: 20px;
+    /* Efecto de entrada */
+    opacity: 0; /* Comienza invisible */
+    transform: translateX(100%); /* Comienza desde la derecha */
+    animation: slideInGoalRight 1s forwards; /* Animación */
+}
+
+/* Animación para el efecto de entrada */
+@keyframes slideInGoalRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+h3 {
+    font-family: 'Montserrat', sans-serif; /* Fuente elegante */
+    font-size: 2rem; /* Tamaño destacado */
+    font-weight: 600; /* Seminegrita */
+    text-align: center; /* Centrado */
+    background: linear-gradient(90deg, #ff8a00, #e52e71); /* Degradado llamativo */
+    -webkit-background-clip: text; /* Aplicar el degradado al texto */
+    -webkit-text-fill-color: transparent; /* Texto transparente para mostrar el degradado */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase; /* Letras mayúsculas */
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    letter-spacing: 1.5px; /* Espaciado entre letras */
+    transition: transform 0.3s ease-in-out; /* Transición suave */
+}
+
+h3:hover {
+    transform: scale(1.1); /* Efecto de aumento al pasar el ratón */
+}
+
+/* Estilo para la barra de progreso */
+#progress-bar {
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.281);
+    border-radius: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 4px 8px rgb(255, 255, 255), 0 8px 16px rgba(255, 255, 255, 0.2); /* Sombra blanca */
+}
+
+#progress-bar-inner {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, rgba(245, 38, 2, 0.8), rgba(3, 248, 15, 0.8)); /* Efecto de degradado suave */
+    position: absolute;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    box-shadow: inset 0 2px 4px rgba(247, 245, 245, 0.2); /* Sombra interna para dar profundidad */
+}
+
+
+/* Estilo para la lista de ahorros */
+#savings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.saving-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(45deg, #2195f360, #000000);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(245, 244, 244, 0.63);
+}
+
+.saving-item.completed {
+    text-decoration: line-through;
+    background: #dcedc8;
+}
+
+/* Estilos de botones */
+button {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    outline: none;
+    text-transform: uppercase;
+}
+
+/* Botón "Ver Más" */
+#show-more-btn {
+    background: linear-gradient(45deg, #02f30a, #2320d4);
+    opacity: 0; /* Comienza invisible */
+    transform: translateX(-100%); /* Comienza desde la izquierda */
+    animation: slideInLeft 1s forwards; /* Animación */
+}
+
+/* Animación para el efecto de entrada */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%); /* Comienza desde la izquierda */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* Llega a su posición original */
+    }
+}
+
+
+#show-more-btn:hover {
+    background: linear-gradient(45deg, #121312,#fa2003);
+    box-shadow: 0 6px 12px rgba(0, 128, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Botón convertido en ícono */
+#reset-btn {
+    background: transparent; /* Sin fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del ícono */
+    font-size: 30px; /* Tamaño del ícono */
+    position: fixed; /* Fijado en la pantalla */
+    bottom: 20px; /* A 20px del fondo */
+    right: 20px; /* A 20px de la derecha */
+    opacity: 0; /* Comienza invisible */
+    transform: translateX(100%); /* Comienza desde la derecha */
+    animation: none; /* Sin animación inicialmente */
+    cursor: pointer; /* Cursor de puntero cuando se pase por encima */
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+
+
+
+#reset-btn:hover {
+    background: linear-gradient(45deg, #c62828, #ec407a);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* Estilos para los íconos */
+.icon-btn {
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 5px;
+}
+
+.icon-btn:hover {
+    background-color: #4caf50;
+    transform: scale(1.1);
+}
+
+.icon-btn.delete:hover {
+    background-color: #f44336;
+}
+
+.icon-btn.edit:hover {
+    background-color: #ffa726;
+}
+
+.saving-item {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+
+/* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.modal h2 {
+    margin-bottom: 20px;
+}
+
+#editAmount {
+    width: 80%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-actions button {
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+.modal-actions button:hover {
+    background-color: #0056b3;
+}
+
+#cancelBtn {
+    background-color: #ccc;
+}
+
+#cancelBtn:hover {
+    background-color: #888;
+}
+
+/* MEDIA QUERIES PARA MÓVILES Y TABLETAS */
+
+/* Para dispositivos móviles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    #progress-bar {
+        height: 25px;
+    }
+
+    #progress-bar-inner {
+        transition: width 0.3s ease;
+    }
+
+    .saving-item {
+        font-size: 1.1em;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+
+    .modal-content {
+        width: 80%;
+    }
+
+    /* Estilos para los íconos */
+.icon-btn {
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 5px;
+}
+
+.icon-btn:hover {
+    background-color: #4caf50;
+    transform: scale(1.1);
+}
+
+.icon-btn.delete:hover {
+    background-color: #f44336;
+}
+
+.icon-btn.edit:hover {
+    background-color: #ffa726;
+}
+
+.saving-item {
+    margin: 5px 0;
+    font-size: 1.2em;
+}
+}
+
+/* Para tabletas (iPads) */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    #progress-bar {
+        height: 28px;
+    }
+
+    .saving-item {
+        font-size: 1.15em;
+    }
+
+    button {
+        font-size: 15px;
+        padding: 11px 19px;
+    }
+
+    .modal-content {
+        width: 70%;
+    }
+
+    /* Estilos para los íconos */
+    .icon-btn {
+        font-size: 20px;
+        padding: 10px;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border-radius: 5px;
+    }
+
+    /* Fijar los colores de fondo de los íconos */
+    .icon-btn.delete {
+        background-color: #f44336; /* Rojo fijo */
+    }
+
+    .icon-btn.edit {
+        background-color: #ffa726; /* Naranja fijo */
+    }
+
+    .icon-btn {
+        background-color: #4caf50; /* Verde fijo */
+    }
+
+    .icon-btn:hover {
+        transform: scale(1.1); /* Solo el efecto de escala sin cambiar el color */
+    }
+
+    .saving-item {
+        margin: 5px 0;
+        font-size: 1.2em;
+    }
+}
+
+
+
+
+
+/* Estilo para el mensaje de ánimo */
+#encouragement-message {
+    position: fixed;
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta para centrar perfectamente */
+    background: linear-gradient(45deg, #51fc02, #000000);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none; /* Inicialmente oculto */
+    animation: slideInFromRight 0.5s ease-in-out; /* Animación de entrada */
+}
+
+
+
+
+/* Estilos para el Modal de Confirmación */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-confirm {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #4caf50; /* Verde */
+    color: white;
+}
+
+.btn-confirm:hover, .btn-cancel:hover {
+    opacity: 0.8;
+}
+
+
+
+
+
+
+
+
+
